@@ -1,0 +1,34 @@
+[package]
+name = "memhop"
+version = "1.0.0"
+edition = "2021"
+description = "Cross-platform memory reader"
+authors = ["Gergő Móricz <mo.geryy@gmail.com>"]
+repository = "https://github.com/mogery/memhop/"
+license = "MIT"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+byteorder = "1.4.3"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+procmaps = "0.4.1"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+mach2 = "0.4"
+darwin-libproc-sys = "0.2.0"
+libc = "0.2"
+regex = "1.6"
+
+[target.'cfg(target_os = "windows")'.dependencies.windows-sys]
+version = "0.36.1"
+features = [
+    "Win32_Foundation",
+    "Win32_System_ProcessStatus",
+    "Win32_System_SystemInformation",
+    "Win32_System_Diagnostics_Debug",
+    "Win32_System_Memory",
+    "Win32_System_ProcessStatus",
+    "Win32_System_Threading",
+]
